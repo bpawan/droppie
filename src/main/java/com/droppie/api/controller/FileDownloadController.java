@@ -38,10 +38,10 @@ public class FileDownloadController {
     public ResponseEntity<ByteArrayResource> downloadFileByTags(@RequestParam(value = "tag") List<String> tags) throws IOException {
         val downloadedFiles = this.fileDownloadService.downloadFilesByTags(tags);
 
-        val zippedFileName = this.fileArchiveService.zipFiles(downloadedFiles, "files/download/", "download.zip");
+        this.fileArchiveService.zipFiles(downloadedFiles, "files/download/", "download.zip");
 
-        val file = new File(zippedFileName);
-        Path path = Paths.get(zippedFileName);
+        val file = new File("files/download/download.zip");
+        Path path = Paths.get("files/download/download.zip");
 
         ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
 

@@ -4,7 +4,6 @@ import com.droppie.api.model.TaggedFile;
 import com.droppie.dal.solr.model.DropboxFile;
 import com.droppie.dal.solr.repository.FileRepository;
 import lombok.val;
-import lombok.var;
 import org.apache.commons.collections4.ListUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
