@@ -46,12 +46,6 @@ class FileDownloaderTest {
 
         fileDownloader.downloadFile(dropBoxFilePath, downloadLocation).subscribe(System.out::println);
 
-        //val expectedFileMeta = new FileMetadata();
 
-        /*StepVerifier
-                .create(this.fileDownloader.downloadFile(dropBoxFilePath, downloadLocation))
-                .expectNext(expectedFileMeta)
-                .verifyComplete();
-                */
     }
 }
