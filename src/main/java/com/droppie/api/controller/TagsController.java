@@ -3,8 +3,8 @@ package com.droppie.api.controller;
 import com.droppie.api.exception.UnableToStoreTagsException;
 import com.droppie.api.model.TaggedFile;
 import com.droppie.dal.solr.model.DropboxFile;
-import com.droppie.service.FileLookupService;
-import com.droppie.service.TagsService;
+import com.droppie.service.file.FileLookupService;
+import com.droppie.service.tag.TagsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

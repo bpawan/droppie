@@ -1,6 +1,5 @@
-package com.droppie.service;
+package com.droppie.util.file;
 
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.jetbrains.annotations.NotNull;
@@ -15,14 +14,10 @@ import java.util.zip.ZipOutputStream;
 
 @Service
 @Slf4j
-public class FileArchiveService {
-    public Boolean zipFiles(
-            @NonNull List<String> downloadedFiles,
-            @NonNull String folderToCreateArchive,
-            @NonNull String zippedFileName
-    ) {
+public class FileArchive {
+    public Boolean zipFiles(List<String> downloadedFiles, String folderToCreateArchive, String zippedFileName) {
 
-        if(downloadedFiles.size() == 0) {
+        if (downloadedFiles.size() == 0) {
             return false;
         }
 
@@ -49,7 +44,7 @@ public class FileArchiveService {
     }
 
     private void addSourceFileToZip(String folderToCreateArchive, ZipOutputStream zipOutputStream, String srcFile) {
-        File fileToZip =  new File(createFilePath(folderToCreateArchive, srcFile));
+        File fileToZip = new File(createFilePath(folderToCreateArchive, srcFile));
 
         try {
             val optionalInputStream = this.createFileInputStream(fileToZip);
@@ -68,7 +63,7 @@ public class FileArchiveService {
         return folderToCreateArchive + File.separator + this.createFileName(srcFile);
     }
 
-    private void writeBytesOnZipFile(ZipOutputStream zipOutputStream, FileInputStream inputStream,String zipFileName)
+    private void writeBytesOnZipFile(ZipOutputStream zipOutputStream, FileInputStream inputStream, String zipFileName)
             throws IOException {
 
         val zipEntry = new ZipEntry(zipFileName);

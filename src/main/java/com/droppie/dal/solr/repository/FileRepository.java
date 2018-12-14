@@ -16,7 +16,7 @@ public interface FileRepository extends PagingAndSortingRepository<DropboxFile, 
     public DropboxFile findExactByFilename(String filename);
 
     @Query("tags: \"?0\"")
-    public List<DropboxFile> findExactByTag(String query);
+    public List<DropboxFile> findExactByTag(String tag);
 
     @Query("tags: ?0")
     public Page<DropboxFile> findByTagCombination(String query, Pageable pageable);

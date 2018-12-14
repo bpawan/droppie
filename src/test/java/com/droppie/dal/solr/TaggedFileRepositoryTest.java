@@ -1,7 +1,6 @@
 package com.droppie.dal.solr;
 
 import com.droppie.dal.solr.repository.FileRepository;
-import com.droppie.dal.solr.repository.TagsRepository;
 import com.droppie.utils.RequiresSolrServer;
 import lombok.val;
 import org.junit.ClassRule;
@@ -25,9 +24,6 @@ public class TaggedFileRepositoryTest {
 
     @Autowired
     private FileRepository fileRepository;
-
-    @Autowired
-    private TagsRepository tagsRepository;
 
     @Test
     @DisplayName("findExactByFilename will returns exactly one matching entry otherwise null.")

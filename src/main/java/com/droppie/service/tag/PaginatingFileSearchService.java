@@ -1,6 +1,6 @@
-package com.droppie.service;
+package com.droppie.service.tag;
 
-import com.droppie.dal.drop_box.DropBoxClient;
+import com.dropbox.core.v2.DbxClientV2;
 import com.droppie.dal.solr.SolrQueryBuilder;
 import com.droppie.dal.solr.model.DropboxFile;
 import com.droppie.dal.solr.repository.FileRepository;
@@ -17,12 +17,12 @@ public class PaginatingFileSearchService {
 
     private final FileRepository taggedFileRepository;
 
-    private final DropBoxClient dropBoxClient;
+    private final DbxClientV2 dbxClientV2;
 
     @Autowired
-    public PaginatingFileSearchService(FileRepository taggedFileRepository, DropBoxClient dropBoxClient) {
+    public PaginatingFileSearchService(FileRepository taggedFileRepository, DbxClientV2 dbxClientV2) {
         this.taggedFileRepository = taggedFileRepository;
-        this.dropBoxClient = dropBoxClient;
+        this.dbxClientV2 = dbxClientV2;
     }
 
     public Page<DropboxFile> findFilesByTags(List<String> tags, String operator, Pageable pageable) {
@@ -50,9 +50,8 @@ public class PaginatingFileSearchService {
     }
 
     private Boolean fileDoesNotExists(String fileName) {
-        val client = this.dropBoxClient.createConnection();
         try {
-            return client
+            return dbxClientV2
                     .files()
                     .getMetadata(fileName)
                     .getPathLower()

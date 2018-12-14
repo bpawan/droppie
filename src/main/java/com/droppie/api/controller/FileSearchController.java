@@ -2,7 +2,7 @@ package com.droppie.api.controller;
 
 import com.droppie.api.model.SearchByTagRequestBody;
 import com.droppie.dal.solr.model.DropboxFile;
-import com.droppie.service.PaginatingFileSearchService;
+import com.droppie.service.tag.PaginatingFileSearchService;
 import com.droppie.service.exception.UnsupportedSearchOperationException;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;

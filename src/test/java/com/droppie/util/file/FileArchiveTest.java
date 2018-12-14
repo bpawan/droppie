@@ -1,4 +1,4 @@
-package com.droppie.service;
+package com.droppie.util.file;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -20,8 +20,8 @@ import static com.google.common.io.Files.asCharSink;
 import static com.google.common.io.Files.createParentDirs;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("File Archive Service")
-class FileArchiveServiceTest {
+@DisplayName("File Archive Tests")
+class FileArchiveTest {
 
     private static final String DOWNLOAD_FOLDER = "files/archive";
 
@@ -29,15 +29,15 @@ class FileArchiveServiceTest {
 
     private static final List<String> filesToZip = List.of("/file1.txt", "/file2.txt");
 
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(FileArchiveService.class);
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(FileArchive.class);
 
-    ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
+    private ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
 
-    private FileArchiveService fileArchiveService = new FileArchiveService();
+    private FileArchive fileArchiveService = new FileArchive();
 
     @Test
     @DisplayName("Create zipped file for provided input files.")
-    void createZipFile() throws Exception {
+    void createZipFile() {
 
         val actual = this.fileArchiveService.zipFiles(filesToZip, DOWNLOAD_FOLDER, ZIPPED_FILE_NAME);
 
@@ -49,7 +49,7 @@ class FileArchiveServiceTest {
 
     @Test
     @DisplayName("Will not create zip file if files list is empty")
-    void testCreateZipFileDueToEmptyFilesToZip() throws Exception {
+    void testCreateZipFileDueToEmptyFilesToZip(){
         val actual = this.fileArchiveService.zipFiles(List.of(), DOWNLOAD_FOLDER, ZIPPED_FILE_NAME);
 
         assertFalse(actual);
@@ -60,7 +60,7 @@ class FileArchiveServiceTest {
 
     @Test
     @DisplayName("Will not zip non-existent file")
-    void willNotCreateZipFileDueToException() throws Exception {
+    void willNotCreateZipFileDueToException() {
         listAppender.start();
         logger.addAppender(listAppender);
 
@@ -75,7 +75,7 @@ class FileArchiveServiceTest {
 
     @Test
     @DisplayName("Will fail on non-existent zip file")
-    void willNotCreateZipFileDueToMissingZipFile() throws Exception {
+    void willNotCreateZipFileDueToMissingZipFile() {
         listAppender.start();
         logger.addAppender(listAppender);
 

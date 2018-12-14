@@ -1,24 +1,11 @@
 package com.droppie.api.controller;
 
 
-import com.droppie.service.FileArchiveService;
-import com.droppie.service.FileDownloadService;
-import lombok.val;
+import com.droppie.service.file.FileDownloadService;
+import com.droppie.util.file.FileArchive;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 @RestController
 @RequestMapping("files")
@@ -26,14 +13,15 @@ public class FileDownloadController {
 
     private final FileDownloadService fileDownloadService;
 
-    private final FileArchiveService fileArchiveService;
+    private final FileArchive fileArchiveService;
 
     @Autowired
-    public FileDownloadController(FileDownloadService fileDownloadService, FileArchiveService fileArchiveService) {
+    public FileDownloadController(FileDownloadService fileDownloadService, FileArchive fileArchiveService) {
         this.fileDownloadService = fileDownloadService;
         this.fileArchiveService = fileArchiveService;
     }
 
+    /*
     @GetMapping("/download")
     public ResponseEntity<ByteArrayResource> downloadFileByTags(@RequestParam(value = "tag") List<String> tags) throws IOException {
         val downloadedFiles = this.fileDownloadService.downloadFilesByTags(tags);
@@ -50,4 +38,5 @@ public class FileDownloadController {
                 .contentType(MediaType.parseMediaType("application/zip"))
                 .body(resource);
     }
+    */
 }

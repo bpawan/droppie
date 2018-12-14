@@ -4,7 +4,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DbxUserFilesRequests;
 import com.dropbox.core.v2.files.Metadata;
-import com.droppie.dal.drop_box.DropBoxClient;
+import com.droppie.service.file.FileLookupService;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,9 +17,9 @@ import static org.mockito.Mockito.when;
 @DisplayName("File lookup Service")
 class FileLookupServiceTest {
 
-    private DropBoxClient dropBoxClient = mock(DropBoxClient.class);
+    private final DbxClientV2 dbxClientV2 = mock(DbxClientV2.class);
 
-    private FileLookupService fileLookupService = new FileLookupService(this.dropBoxClient);
+    private FileLookupService fileLookupService = new FileLookupService(dbxClientV2);
 
     @Test
     @DisplayName("Assert file exists on server.")
@@ -55,8 +55,6 @@ class FileLookupServiceTest {
         val fileName = "test_file.docx";
 
         val dropBoxClient = mock(DbxClientV2.class);
-        when(this.dropBoxClient.createConnection())
-                .thenReturn(dropBoxClient);
 
         val userFilesRequestMock = mock(DbxUserFilesRequests.class);
 
@@ -77,8 +75,5 @@ class FileLookupServiceTest {
 
         when(userFilesRequestMock.getMetadata(fileName))
                 .thenReturn(metadata);
-
-        when(this.dropBoxClient.createConnection())
-                .thenReturn(dropBoxClient);
     }
 }

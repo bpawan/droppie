@@ -3,6 +3,7 @@ package com.droppie.service;
 import com.droppie.api.model.TaggedFile;
 import com.droppie.dal.solr.model.DropboxFile;
 import com.droppie.dal.solr.repository.FileRepository;
+import com.droppie.service.tag.TagsService;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

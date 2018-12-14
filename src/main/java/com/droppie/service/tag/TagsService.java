@@ -1,4 +1,4 @@
-package com.droppie.service;
+package com.droppie.service.tag;
 
 import com.droppie.api.model.TaggedFile;
 import com.droppie.dal.solr.model.DropboxFile;

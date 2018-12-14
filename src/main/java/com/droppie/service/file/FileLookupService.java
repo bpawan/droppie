@@ -1,22 +1,22 @@
-package com.droppie.service;
+package com.droppie.service.file;
 
 import com.dropbox.core.DbxException;
-import com.droppie.dal.drop_box.DropBoxClient;
-import lombok.val;
+import com.dropbox.core.v2.DbxClientV2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FileLookupService {
-    private final DropBoxClient dropBoxClient;
+    private final DbxClientV2 dbxClientV2;
 
-    public FileLookupService(DropBoxClient dropBoxClient) {
-        this.dropBoxClient = dropBoxClient;
+    @Autowired
+    public FileLookupService(DbxClientV2 dbxClientV2) {
+        this.dbxClientV2 = dbxClientV2;
     }
 
     public Boolean fileExistsOnServer(String fileName) {
-        val client = this.dropBoxClient.createConnection();
         try {
-            return !client
+            return !dbxClientV2
                     .files()
                     .getMetadata(fileName)
                     .getPathLower()
